@@ -1,0 +1,22 @@
+name: "GDELT"
+ingestion_window: '1d'
+timestamp_unit: 's'
+batch_size: 1024
+task: "node_classification"
+num_nodes: 16682
+num_edges: 191290882
+node_feat_dim: 413
+edge_feat_dim: 186
+num_classes: 2
+test_ratio: 0.2
+num_epochs: 20
+data:
+    initial_pool_size: 10
+    maximum_pool_size: 200
+    minimum_block_size: 4
+    mem_resource_type: "pinned"
+    blocks_to_preallocate: 8196
+cache:
+    name: 'lru'
+    node_cache_ratio: 1
+    edge_cache_ratio: 0.01

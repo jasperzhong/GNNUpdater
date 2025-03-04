@@ -1,0 +1,28 @@
+name: "tgbn_token"
+ingestion_window: '1d'
+timestamp_unit: 's'
+batch_size: 2000
+task: 'node_classification'
+eval_metric: "ndcg"
+num_nodes: 61756
+num_edges: 72936998
+num_classes: 1001
+node_feat_dim: 100 
+edge_feat_dim: 2
+test_ratio: 0.2
+num_epochs: 20
+finetune_num_epochs: 1
+initial_offline_ratio: 0.1
+slo_threshold: 0.25
+offline_ratio: 0.3
+data:
+    initial_pool_size: 5
+    maximum_pool_size: 10
+    minimum_block_size: 8
+    mem_resource_type: "cuda"
+    blocks_to_preallocate: 8196
+cache:
+    name: 'lru'
+    node_cache_ratio: 0.17
+    edge_cache_ratio: 0.15
+

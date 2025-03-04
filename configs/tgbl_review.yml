@@ -1,0 +1,22 @@
+name: "tgbl_review"
+ingestion_window: '1d'
+timestamp_unit: 's'
+batch_size: 1024
+task: "link_prediction"
+num_nodes: 352637
+num_edges: 4873540
+node_feat_dim: 100 
+edge_feat_dim: 1
+num_neg_e: 100
+test_ratio: 0.2
+num_epochs: 20
+data:
+    initial_pool_size: 1
+    maximum_pool_size: 4
+    minimum_block_size: 32
+    mem_resource_type: "cuda"
+    blocks_to_preallocate: 1024
+cache:
+    name: 'lru'
+    node_cache_ratio: 1
+    edge_cache_ratio: 1
