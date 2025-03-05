@@ -23,7 +23,7 @@ inline py::array vec2npy(const std::vector<T> &vec) {
   return py::array(v->size(), v->data(), capsule);
 }
 
-PYBIND11_MODULE(libgnnflow, m) {
+PYBIND11_MODULE(libgnnupdater, m) {
   py::enum_<InsertionPolicy>(m, "InsertionPolicy")
       .value("INSERT", InsertionPolicy::kInsertionPolicyInsert)
       .value("REPLACE", InsertionPolicy::kInsertionPolicyReplace);

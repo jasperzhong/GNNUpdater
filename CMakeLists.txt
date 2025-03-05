@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.18)
-project(libgnnflow CXX)
+project(libgnnupdater CXX)
 enable_language(CUDA)
 
-set(TARGET_LIB "libgnnflow")
+set(TARGET_LIB "libgnnupdater")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -41,20 +41,20 @@ add_subdirectory(third_party/pybind11)
 
 
 include_directories(${PYTHON_INCLUDE_DIRS})
-include_directories(${PROJECT_SOURCE_DIR}/gnnflow/csrc)
+include_directories(${PROJECT_SOURCE_DIR}/gnnupdater/csrc)
 include_directories(/usr/local/cuda/include)
 include_directories(third_party/pybind11/include)
 include_directories(third_party/spdlog/include)
 include_directories(third_party/rmm/include)
 
 
-file(GLOB_RECURSE GNNFLOW_SRC_FILES ${PROJECT_SOURCE_DIR}/gnnflow/csrc/*.cc)
-set_source_files_properties(${PROJECT_SOURCE_DIR}/gnnflow/csrc/api.cc PROPERTIES LANGUAGE CUDA)
-file(GLOB_RECURSE GNNFLOW_SRC_CUDA_FILES ${PROJECT_SOURCE_DIR}/gnnflow/csrc/*.cu)
-set_source_files_properties(${GNNFLOW_SRC_CUDA_FILES} PROPERTIES LANGUAGE CUDA)
-list(APPEND GNNFLOW_SRC_FILES ${GNNFLOW_SRC_CUDA_FILES})
+file(GLOB_RECURSE GNNUPDATER_SRC_FILES ${PROJECT_SOURCE_DIR}/gnnupdater/csrc/*.cc)
+set_source_files_properties(${PROJECT_SOURCE_DIR}/gnnupdater/csrc/api.cc PROPERTIES LANGUAGE CUDA)
+file(GLOB_RECURSE GNNUPDATER_SRC_CUDA_FILES ${PROJECT_SOURCE_DIR}/gnnupdater/csrc/*.cu)
+set_source_files_properties(${GNNUPDATER_SRC_CUDA_FILES} PROPERTIES LANGUAGE CUDA)
+list(APPEND GNNUPDATER_SRC_FILES ${GNNUPDATER_SRC_CUDA_FILES})
 
-pybind11_add_module(${TARGET_LIB} ${GNNFLOW_SRC_FILES})
+pybind11_add_module(${TARGET_LIB} ${GNNUPDATER_SRC_FILES})
 
 add_subdirectory(third_party/abseil-cpp)
 target_link_libraries(${TARGET_LIB} PRIVATE absl::flat_hash_map)

@@ -5,7 +5,8 @@ import numpy as np
 from parameterized import parameterized
 
 from gnnupdater.config import get_default_config
-from gnnupdater.utils import build_dynamic_graph, load_dataset
+from gnnupdater.utils import load_dataset
+from gnnupdater.dynamic_graph import build_dynamic_graph
 
 MB = 1 << 20
 GB = 1 << 30
