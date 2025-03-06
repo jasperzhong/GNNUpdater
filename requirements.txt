@@ -4,4 +4,7 @@ parameterized
 pandas 
 scikit-learn
 alibi-detect
+torch_geometric
+scipy
 pyarrow
+py-tgb

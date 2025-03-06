@@ -33,6 +33,8 @@ parser.add_argument('--delta', type=float, default=0.002,
                     help='The delta parameter for the ADWIN algorithm.')
 parser.add_argument('--alpha', type=float, default=0.005,
                     help='Probability for the test statistic of the Kolmogorov-Smirnov-Test The alpha parameter is very sensitive, therefore should be set below 0.01')
+parser.add_argument('--delay', type=int, default=7,
+                    help='Label delay in days')
 args = parser.parse_args()
 
 if __name__ == '__main__':
@@ -53,7 +55,7 @@ if __name__ == '__main__':
             accuracy_drop_window=args.accuracy_drop_window,
             problem_ratio=args.problem_ratio, k=args.k, weight=args.weight,
             delta=args.delta, alpha=args.alpha, distance_threshold=args.distance_threshold,
-            sliding_window=args.sliding_window)
+            sliding_window=args.sliding_window, delay=args.delay)
     elif args.phase == 'collect':
         learner.collecting_data_from_offline()
     elif args.phase == 'benchmark':

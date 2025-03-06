@@ -97,8 +97,7 @@ def verify_conversion(old_dict, new_dict):
 
 
 if __name__ == '__main__':
-    # datasets = ['tgbn_genre', 'tgbn_reddit', 'tgbn_token']
-    datasets = ['tgbn_token']
+    datasets = ['tgbn_genre', 'tgbn_reddit', 'tgbn_token']
     for dataset in datasets:
         print(f"Processing {dataset}...")
         # Load edge data
@@ -116,43 +115,35 @@ if __name__ == '__main__':
         if dataset == 'tgbn_token':
             df['w'] = np.log(df['w'])
         df['w'] = df['w'].astype(np.float32)
-        import pdb
-        pdb.set_trace()
 
         df.to_feather(f"{dataset}/edges.feather")
 
-        # edge_feat_path = f"{dataset}/ml_{dataset_name}_edge.pkl"
-        # if os.path.exists(edge_feat_path):
-        #     with open(edge_feat_path, 'rb') as f:
-        #         edge_feat = pickle.load(f)
-        #     if dataset == 'tgbn_token':
-        #         print("applying log transformation to edge features")
-        #         edge_feat[:, 0] = np.log(edge_feat[:, 0])
-        #         import pdb
-        #         pdb.set_trace()
-        #     edge_feat = edge_feat.astype(np.float32)
-        #     np.save(f"{dataset}/edge_features.npy", edge_feat)
-        # else:
-        #     print(f"Edge feature file not found: {edge_feat_path}")
+        edge_feat_path = f"{dataset}/ml_{dataset_name}_edge.pkl"
+        if os.path.exists(edge_feat_path):
+            with open(edge_feat_path, 'rb') as f:
+                edge_feat = pickle.load(f)
+            if dataset == 'tgbn_token':
+                print("applying log transformation to edge features")
+                edge_feat[:, 0] = np.log(edge_feat[:, 0])
+            edge_feat = edge_feat.astype(np.float32)
+            np.save(f"{dataset}/edge_features.npy", edge_feat)
+        else:
+            print(f"Edge feature file not found: {edge_feat_path}")
 
-        # print(f"Processing {dataset}...")
-        # dataset_name = dataset.replace('_', '-')
-        # node_path = f"{dataset}/ml_{dataset_name}_node.pkl"
-        # if dataset == 'tgbn_genre':
-        #     node_label_dict = pickle.load(open(node_path, 'rb'))
-        #     import pdb
-        #     pdb.set_trace()
-        #     # new_node_label_dict = convert_to_sparse_format(node_label_dict)
-        #     # assert verify_conversion(node_label_dict, new_node_label_dict)
-        #     # with open(node_path, 'wb') as f:
-        #     #     pickle.dump(new_node_label_dict, f)
-        # else:
-        #     # node_ids = pickle.load(open(node_path, 'rb'))
-        #     rd_dict = pickle.load(
-        #         open(f"{dataset}/ml_{dataset_name}_label.pkl", 'rb'))
-        #     import pdb
-        #     pdb.set_trace()
-        #     # node_label_dict = load_label_dict(
-        #     #     f"{dataset}/{dataset_name}_node_labels.csv", node_ids, rd_dict)
-        #     # with open(node_path, 'wb') as f:
-        #     #     pickle.dump(node_label_dict, f)
+        print(f"Processing {dataset}...")
+        dataset_name = dataset.replace('_', '-')
+        node_path = f"{dataset}/ml_{dataset_name}_node.pkl"
+        if dataset == 'tgbn_genre':
+            node_label_dict = pickle.load(open(node_path, 'rb'))
+            new_node_label_dict = convert_to_sparse_format(node_label_dict)
+            assert verify_conversion(node_label_dict, new_node_label_dict)
+            with open(node_path, 'wb') as f:
+                pickle.dump(new_node_label_dict, f)
+        else:
+            node_ids = pickle.load(open(node_path, 'rb'))
+            rd_dict = pickle.load(
+                open(f"{dataset}/ml_{dataset_name}_label.pkl", 'rb'))
+            node_label_dict = load_label_dict(
+                f"{dataset}/{dataset_name}_node_labels.csv", node_ids, rd_dict)
+            with open(node_path, 'wb') as f:
+                pickle.dump(node_label_dict, f)
