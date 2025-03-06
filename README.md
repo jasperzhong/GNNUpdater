@@ -105,6 +105,7 @@ Here's how to run experiments with GNNUpdater, using `tgbn_genre` dataset and TG
 First, train a base model using the first 30% of the dataset's timespan:
 
 ```bash
+cd scripts
 python continuous_learning.py --dataset tgbn_genre --model TGAT --phase offline 
 ```
 
