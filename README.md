@@ -5,9 +5,11 @@ This repository contains the code for the paper "GNNUpdater: Adaptive Self-Trigg
 
 ## Overview
 
-![](figs/overview.png)
+![](figs/challenges.png)
 
 GNNUpdater is the first adaptive framework for continual graph learning that determines **when to update** GNN models in streaming environments. In real-world applications like recommendation systems and fraud detection, graphs evolve constantly, causing deployed GNN models to gradually become outdated. GNNUpdater addresses the critical question of update timing by monitoring embedding shifts to predict performance degradation without requiring immediate ground truth labels, and using graph structure awareness to evaluate model health globally.
+
+![](figs/overview.png)
 
 Our main contributions include:
 
